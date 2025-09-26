@@ -15,7 +15,7 @@ Technologies & Environment
 - Guest OS: Ubuntu 24.04 LTS Server (UFW - Uncomplicated Firewall)
 - Verification Tools: telnet utility and sudo ufw status verbose
 
-Key Steps & Commands Demonstrated
+Key Steps & Commands Demonstrated:
 The project involved documenting both GUI and CLI steps to manage firewall policies.
 
 Windows Firewall (GUI)
