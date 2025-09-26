@@ -1,79 +1,101 @@
 # Firewall Configuration and Testing (Windows & Linux UFW)
-This repository contains the documentation and evidence for Task: Setup and Use a Firewall on Windows/Linux. The project objective was to demonstrate the ability to configure, test, and manage basic network filtering rules across two different operating systems.
+
+This repository contains the documentation and evidence for the network security task focusing on firewall configuration and management across two distinct operating systems.
 
 Project Objective
-To configure and test firewall rules to selectively allow or block network traffic, specifically:
+The primary goal was to successfully implement, test, and manage specific packet filtering rules:
 
-Block (DENY): Telnet traffic on TCP Port 23 (Temporary Test Rule)
+ALLOW Secure Shell (SSH) traffic on TCP Port 22.
 
-Allow (ALLOW): Secure Shell (SSH) traffic on TCP Port 22 (Persistent Rule)
+DENY (Block) Telnet traffic on TCP Port 23 as a temporary test of the block mechanism.
 
-Theoretical Summary: How Firewalls Filter Traffic
-A firewall acts as a security checkpoint, examining network packets against a defined Rule Set to determine whether traffic is allowed or blocked. Filtering is primarily based on:
+Restore the system state by removing the temporary block rule.
 
-IP Address: Source and Destination.
-
-Protocol: TCP or UDP.
-
-Port Number: The application channel (e.g., 22, 23, 80).
-
-Traffic is processed top-down through the rules. The first rule to match the packet determines the action (ALLOW, DENY, or REJECT). If no rule matches, the firewall applies its Default Policy (typically DENY).
-
-Tools and Environment
+Technologies & Environment
 Component
 
 Role
 
-Notes
+Firewall Tool Used
 
 Host OS
 
 Windows 10/11
 
-Used for local testing and running the VM.
+Windows Defender Firewall with Advanced Security (GUI)
 
 Virtualization
 
 Oracle VirtualBox
 
-Used to host the Linux Server VM.
+N/A
 
 Guest OS
 
 Ubuntu 24.04 LTS Server
 
-Used for command-line firewall configuration.
+UFW (Uncomplicated Firewall) (CLI)
 
-Firewalls
+Verification
 
-Windows Defender Firewall with Advanced Security (GUI)
+telnet utility
 
-UFW (Uncomplicated Firewall) on Linux (CLI)
+sudo ufw status verbose
 
-Key Steps Performed
-This project demonstrated the ability to handle both Graphical and Command-Line firewall management:
+Key Steps & Commands Demonstrated
+The project involved documenting both GUI and CLI steps to manage firewall policies.
 
 Windows Firewall (GUI)
-Created an Outbound Rule using the GUI to explicitly Block TCP Port 23.
+Created a specific Outbound Rule to block TCP Port 23.
 
-Verified the rule using the telnet 127.0.0.1 23 command, proving the firewall successfully enforced the block policy.
+Verified the policy by attempting a connection using telnet 127.0.0.1 23 from the Command Prompt, confirming the firewall enforced the block.
 
-Linux Firewall (UFW - CLI)
-Enabled the UFW service using sudo ufw enable.
+Created a persistent Inbound Rule to allow TCP Port 22.
 
-Applied a block rule (sudo ufw deny 23/tcp) and an allow rule (sudo ufw allow 22/tcp).
+Linux UFW (CLI)
+The following commands were executed sequentially on the Ubuntu Server VM:
 
-Verified the state using sudo ufw status numbered (Step 2).
+Step
 
-Used the sudo ufw delete [NUMBER] command to carefully remove the temporary Port 23 block rules (Step 6).
+Command
 
-Restored the final state to only allow SSH traffic (Port 22).
+Purpose
 
-Deliverables
-The final report (Firewall_Report.pdf) contains the full documentation, including:
+1.
 
-A summary of how packet filtering firewalls operate.
+sudo ufw enable
 
-Screenshots documenting every required step and command.
+Activates the UFW service.
 
-Final verification of the clean state on both systems.
+2.
+
+sudo ufw deny 23/tcp
+
+Implements the temporary block rule.
+
+3.
+
+sudo ufw allow 22/tcp
+
+Implements the persistent allow rule.
+
+4.
+
+sudo ufw status numbered
+
+Verifies the rules and retrieves their assigned numbers.
+
+5.
+
+sudo ufw delete [NUMBER]
+
+Cleans up the environment by removing the temporary Port 23 block rule(s).
+
+6.
+
+sudo ufw status verbose
+
+Final verification, confirming only Port 22 is active.
+
+Report & Evidence
+All detailed steps, command outputs, a summary of firewall operation, and required verification screenshots are contained in the main submission document: Firewall_Report.md.
