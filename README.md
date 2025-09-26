@@ -12,35 +12,13 @@ DENY (Block) Telnet traffic on TCP Port 23 as a temporary test of the block mech
 Restore the system state by removing the temporary block rule.
 
 Technologies & Environment
-Component
+Host OS: Windows 10/11 (Windows Defender Firewall with Advanced Security)
 
-Role
+Virtualization: Oracle VirtualBox
 
-Firewall Tool Used
+Guest OS: Ubuntu 24.04 LTS Server (UFW - Uncomplicated Firewall)
 
-Host OS
-
-Windows 10/11
-
-Windows Defender Firewall with Advanced Security (GUI)
-
-Virtualization
-
-Oracle VirtualBox
-
-N/A
-
-Guest OS
-
-Ubuntu 24.04 LTS Server
-
-UFW (Uncomplicated Firewall) (CLI)
-
-Verification
-
-telnet utility
-
-sudo ufw status verbose
+Verification Tools: telnet utility and sudo ufw status verbose
 
 Key Steps & Commands Demonstrated
 The project involved documenting both GUI and CLI steps to manage firewall policies.
@@ -53,49 +31,19 @@ Verified the policy by attempting a connection using telnet 127.0.0.1 23 from th
 Created a persistent Inbound Rule to allow TCP Port 22.
 
 Linux UFW (CLI)
-The following commands were executed sequentially on the Ubuntu Server VM:
+The following steps and corresponding commands were executed sequentially on the Ubuntu Server VM:
 
-Step
+Enable UFW: sudo ufw enable
 
-Command
+Block Port 23 (Test): sudo ufw deny 23/tcp
 
-Purpose
+Allow Port 22 (Persistent): sudo ufw allow 22/tcp
 
-1.
+Verify Rules: sudo ufw status numbered (Used to find the rule numbers for deletion)
 
-sudo ufw enable
+Remove Block Rule: sudo ufw delete [NUMBER] (Executed for both IPv4 and IPv6 Port 23 block rules)
 
-Activates the UFW service.
-
-2.
-
-sudo ufw deny 23/tcp
-
-Implements the temporary block rule.
-
-3.
-
-sudo ufw allow 22/tcp
-
-Implements the persistent allow rule.
-
-4.
-
-sudo ufw status numbered
-
-Verifies the rules and retrieves their assigned numbers.
-
-5.
-
-sudo ufw delete [NUMBER]
-
-Cleans up the environment by removing the temporary Port 23 block rule(s).
-
-6.
-
-sudo ufw status verbose
-
-Final verification, confirming only Port 22 is active.
+Final Verification: sudo ufw status verbose (Confirmed only Port 22 rules remain active)
 
 Report & Evidence
 All detailed steps, command outputs, a summary of firewall operation, and required verification screenshots are contained in the main submission document: Firewall_Report.md.
