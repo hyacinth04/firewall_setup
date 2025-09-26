@@ -1,5 +1,5 @@
 # Firewall Configuration and Testing (Windows & Linux UFW)
-This repository contains the documentation and evidence for Task 4: Setup and Use a Firewall on Windows/Linux. The project objective was to demonstrate the ability to configure, test, and manage basic network filtering rules across two different operating systems.
+This repository contains the documentation and evidence for Task: Setup and Use a Firewall on Windows/Linux. The project objective was to demonstrate the ability to configure, test, and manage basic network filtering rules across two different operating systems.
 
 Project Objective
 To configure and test firewall rules to selectively allow or block network traffic, specifically:
